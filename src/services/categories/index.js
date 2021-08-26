@@ -1,4 +1,6 @@
 import { Router } from "express";
+import db from "../../db/models/index.js";
+const { Category } = db;
 
 const router = Router();
 
@@ -13,6 +15,10 @@ router
   })
   .post(async (req, res, next) => {
     try {
+      console.log(req.body);
+      // const data = await Category.bulkCreate(req.body.category);
+      const data = await Category.create(req.body);
+      res.send(data);
     } catch (error) {
       console.log(error);
       next(error);

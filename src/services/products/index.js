@@ -1,6 +1,8 @@
 import { Router } from "express";
 
 import s from "sequelize";
+import db from "../../db/models/index.js";
+const Product = db.Product;
 const { Op } = s;
 const router = Router();
 

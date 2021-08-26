@@ -1,5 +1,5 @@
 import express from "express";
-
+import { syncSequelize } from "./db/index.js";
 import cors from "cors";
 import productsRouter from "./services/products/index.js";
 import categoriesRouter from "./services/categories/index.js";
@@ -19,6 +19,7 @@ app.use("/cart", cartRouter);
 
 app.listen(port, async () => {
   console.log("🚀 Server is running on port ", port);
+  await syncSequelize();
 });
 
 app.on("error", (error) => console.log("🚀 Server is crashed due to ", error));

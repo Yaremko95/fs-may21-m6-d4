@@ -12,7 +12,16 @@ Product.belongsTo(Category, {
   foreignKey: { allowNull: false },
 });
 
-Product.belongsToMany(User, { through: Cart });
-User.belongsToMany(Product, { through: Cart });
+//Product.findAll({include:User})
+Product.belongsToMany(User, { through: { model: Cart, unique: false } }); //unique: false => to prevnt creating primary key
+
+//User.findAll({include:Product})
+User.belongsToMany(Product, { through: { model: Cart, unique: false } }); //unique: false => to prevnt creating primary key
+
+Product.hasMany(Cart); // Product.findAll({include: Cart})
+Cart.belongsTo(Product); // Cart.findAll({include: Product})
+
+User.hasMany(Cart); // User.findAll({include: Cart})
+Cart.belongsTo(User); // Cart.findAll({include: User})
 
 export default { Product, Category, Cart, User };

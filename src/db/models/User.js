@@ -3,8 +3,8 @@ import s from "sequelize";
 
 const { DataTypes } = s;
 
-const Product = sequelize.define(
-  "product",
+const User = sequelize.define(
+  "user",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,8 +15,8 @@ const Product = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    price: {
-      type: DataTypes.FLOAT,
+    email: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
@@ -25,4 +25,4 @@ const Product = sequelize.define(
   }
 );
 
-export default Product;
+export default User;

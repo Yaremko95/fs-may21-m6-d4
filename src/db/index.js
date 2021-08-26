@@ -19,7 +19,7 @@ export const syncSequelize = async () => {
     await sequelize.authenticate();
     await sequelize.query(schemas);
     await sequelize.sync({
-      force: true,
+      alter: true,
       logging: false,
       schema: "development",
     });

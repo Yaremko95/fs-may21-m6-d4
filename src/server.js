@@ -1,5 +1,5 @@
 import express from "express";
-import { sequlize } from "./db/index.js";
+
 import cors from "cors";
 import productsRouter from "./services/products/index.js";
 import categoriesRouter from "./services/categories/index.js";
@@ -17,13 +17,8 @@ app.use("/categories", categoriesRouter);
 app.use("/users", usersRouter);
 app.use("/cart", cartRouter);
 
-sequlize
-  .sync({ alter: false })
-  .then(() => {
-    app.listen(port, () => console.log("🚀 Server is running on port ", port));
+app.listen(port, async () => {
+  console.log("🚀 Server is running on port ", port);
+});
 
-    app.on("error", (error) =>
-      console.log("🚀 Server is crashed due to ", error)
-    );
-  })
-  .catch((e) => console.log(e));
+app.on("error", (error) => console.log("🚀 Server is crashed due to ", error));

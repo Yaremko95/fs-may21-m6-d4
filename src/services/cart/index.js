@@ -1,16 +1,51 @@
 import { Router } from "express";
 import db from "../../db/models/index.js";
 import sequelize from "sequelize";
-const { Cart } = db;
+import Category from "../../db/models/category.js";
+const { Cart, Product } = db;
 const router = Router();
 
 router.route("/:userId").get(async (req, res, next) => {
   try {
     const data = await Cart.findAll({
       where: { userId: req.params.userId },
-      include: [db.Product],
     });
-    res.send(data);
+
+    const groupBy = await Cart.findAll({
+      attributes: ["productId", [sequelize.fn("COUNT", "id"), "unitary_qty"]],
+      where: {
+        userId: req.params.userId,
+      },
+      group: "productId",
+    });
+
+    const groupAndIcludeProduct = await Cart.findAll({
+      attributes: [
+        "productId",
+        [sequelize.fn("COUNT", "id"), "unitary_qty"],
+        [sequelize.fn("SUM", sequelize.col("product.price")), "unitary_price"],
+      ],
+      where: {
+        userId: req.params.userId,
+      },
+      include: { model: Product, attributes: ["name", "price"] },
+      group: ["productId", "product.id"],
+    });
+
+    const countAll = await Cart.count({
+      where: { userId: req.params.userId },
+    });
+
+    const sumAll = await Cart.sum("product.price", {
+      include: { model: Product, attributes: [] },
+      where: { userId: req.params.userId },
+    });
+
+    res.send({
+      products: groupAndIcludeProduct,
+      total: countAll,
+      totalPrice: sumAll,
+    });
   } catch (error) {
     console.log(error);
     next(error);

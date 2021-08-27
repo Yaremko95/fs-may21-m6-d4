@@ -14,21 +14,21 @@ const sequelize = new Sequelize(PGDATABASE, PGUSER, PGPASSWORD, {
   },
 });
 
-const schemas = ["development", "production"]
-  .map(
-    (schema) => `CREATE SCHEMA  IF NOT EXISTS ${schema} AUTHORIZATION postgres`
-  )
-  .join(";");
-console.log(schemas);
+// const schemas = ["development", "production"]
+//   .map(
+//     (schema) => `CREATE SCHEMA  IF NOT EXISTS ${schema} AUTHORIZATION postgres`
+//   )
+//   .join(";");
+// console.log(schemas);
 
 export const syncSequelize = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.query(schemas, { type: QueryTypes.SELECT });
+    // await sequelize.query(schemas, { type: QueryTypes.SELECT });
     await sequelize.sync({
       //   force: true,
       logging: false,
-      schema: "development",
+      // schema: "development",
     });
     console.log("DB authenticated");
   } catch (error) {

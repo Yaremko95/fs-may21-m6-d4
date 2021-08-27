@@ -18,7 +18,7 @@ const Category = sequelize.define(
   },
   {
     timestamps: false,
-    schema: "development",
+    //  schema: "development",
   }
 );
 

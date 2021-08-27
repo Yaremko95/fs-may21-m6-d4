@@ -13,7 +13,7 @@ const Cart = sequelize.define(
     },
   },
   {
-    schema: "development",
+    //   schema: "development",
   }
 );
 

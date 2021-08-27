@@ -1,7 +1,7 @@
 import { Router } from "express";
 import db from "../../db/models/index.js";
 import sequelize from "sequelize";
-import Category from "../../db/models/category.js";
+
 const { Cart, Product } = db;
 const router = Router();
 

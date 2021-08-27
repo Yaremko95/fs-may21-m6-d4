@@ -4,9 +4,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "v14.15.4"
+  },
   "scripts": {
-    "setup": "node src/scripts/import",
-    "start": "nodemon -r dotenv/config src/server.js"
+    "dev": "nodemon -r dotenv/config src/server.js",
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",

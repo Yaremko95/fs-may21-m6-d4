@@ -19,10 +19,10 @@ const Product = sequelize.define(
       type: DataTypes.FLOAT,
       allowNull: false,
     },
+  },
+  {
+    schema: "development",
   }
-  // {
-  //   schema: "development",
-  // }
 );
 
 export default Product;

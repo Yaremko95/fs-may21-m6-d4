@@ -1,5 +1,5 @@
-import Product from "./product.js";
-import Category from "./category.js";
+import Product from "./Product.js";
+import Category from "./Category.js";
 import Cart from "./Cart.js";
 import User from "./User.js";
 
